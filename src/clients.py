@@ -371,11 +371,11 @@ class Clients():
         piece_length = metainfo["info"]["piece length"]
         offset = 0
 
-        for fileinfo in files:
-            # Get the path into the filesystem
-            filepath = os.sep.join(fileinfo["path"])
-            if not single:
-                filepath = os.path.join(datapath, filepath.strip(os.sep))
+        file_index = 0
+        for torrent_filepath in torrent.files:
+            fileinfo = files[file_index]
+            file_index = file_index + 1
+            filepath = os.path.join(datapath, torrent_filepath)
 
             # Check file size
             if os.path.getsize(filepath) != fileinfo["length"]:
